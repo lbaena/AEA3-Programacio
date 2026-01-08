@@ -3,7 +3,8 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'lluc.baena'
+group = 'lbaena'
+version = '1.0.2'
 
 repositories {
     mavenCentral()
@@ -20,8 +21,19 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/lbaena/Programacio-AEA3")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = project.findProperty("GITHUB_USER")
+                password = project.findProperty("GITHUB_TOKEN")
+            }
+        }
+    }
+    publications {
+        gpr(MavenPublication) {
+            from(components.java)
+            artifactId = "01-colors"
+
+            pom {
+                name = "01-colors"
+                description = "Llibreria per treballar amb colors en Java"
             }
         }
     }
